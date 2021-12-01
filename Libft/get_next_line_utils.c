@@ -6,23 +6,11 @@
 /*   By: iderighe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 15:04:23 by iderighe          #+#    #+#             */
-/*   Updated: 2021/11/29 12:56:45 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:13:47 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
-
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 int	ft_strn(char *s)
 {

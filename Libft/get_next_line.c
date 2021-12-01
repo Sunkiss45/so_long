@@ -6,11 +6,11 @@
 /*   By: iderighe <iderighe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 13:31:32 by iderighe          #+#    #+#             */
-/*   Updated: 2021/11/29 12:55:05 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:13:08 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "libft.h"
 
 int	ft_check_n(char *str)
 {
