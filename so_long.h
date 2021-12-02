@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:50:54 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/01 17:47:58 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/02 22:26:21 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include <limits.h>
 # include "Libft/libft.h"
+# include "minilibx-linux/mlx.h"
 
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
@@ -31,6 +32,7 @@
 # define RESET "\033[0m"
 
 # define BUFFER_SIZE 1024
+# define PI 64
 
 typedef struct s_dll
 {
@@ -44,11 +46,22 @@ typedef struct s_dll
 typedef struct s_adm
 {
 	int				y;
+	int				col;
+	struct s_dll	*play;
 	struct s_dll	*head;
 	struct s_dll	*tail;
 }	t_adm;
 
+typedef struct s_plp
+{
+	int	x;
+	int	y;
+}	t_plp;
+
 void	all_display(t_adm **adm);
+
+int		count_nb(t_adm *adm);
+int		ft_graphical(t_adm **adm, int x, int y);
 
 void	*ft_error(char *s, void *r);
 void	*ft_error_frli(char *s, void *r, int ret, char *line);

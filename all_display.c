@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 17:04:12 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/11/30 17:03:32 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/02 18:50:44 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,21 @@ void	all_display(t_adm **adm)
 	while (++i < y)
 	{
 		now = adm[i]->head;
-		printf(RED"NULL -> ");
 		while (now != NULL)
 		{
-			printf(GREEN"%c", now->c);
+			if (now->c == '1')
+				printf(RED"%c", now->c);
+			if (now->c == '0')
+				printf(GREEN"%c", now->c);
+			if (now->c == 'P')
+				printf(BLUE"%c", now->c);
+			if (now->c == 'E')
+				printf(CYAN"%c", now->c);
+			if (now->c == 'C')
+				printf(YELLOW"%c", now->c);
 			now = now->r;
 		}
-		printf(RED" -> NULL"RESET"\n");
+		printf(RESET"\n");
 	}
 
 	y = s;

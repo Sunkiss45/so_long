@@ -6,26 +6,29 @@
 #    By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 16:06:27 by ebarguil          #+#    #+#              #
-#    Updated: 2021/12/01 17:57:54 by ebarguil         ###   ########.fr        #
+#    Updated: 2021/12/02 18:33:38 by ebarguil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	so_long
 
-LFT		=	Libft/libft.a
-
-LIB		=	-L ./Libft -lft
+LIB		=	-L ./Libft -lft -L ./minilibx-linux -lmlx -lXext -lX11
 
 SRC		=	main.c \
 			all_display.c \
 			list_main.c \
 			error.c \
 			checker.c \
+			graph.c \
 			free.c \
 
 OBJ		=	$(SRC:.c=.o)
 
 N		=	norminette
+
+SLIBX	=	mv minilibx-linux .minilibx-linux
+
+RLIBX	=	mv .minilibx-linux minilibx-linux
 
 CC		=	gcc
 
@@ -35,12 +38,11 @@ CFS		=	-fsanitize=address -g3
 
 RM		=	rm -rf
 
-$(LFT)	:
-			make -C Libft
-
 all		:	$(NAME)
 
-$(NAME)	:	$(LFT) $(OBJ)
+$(NAME)	:	$(OBJ)
+			make -C Libft
+			make -C minilibx-linux
 			$(CC) $(CF) -o $(NAME) $(SRC) $(LIB)
 
 clean	:
@@ -49,15 +51,23 @@ clean	:
 fclean	:	clean
 			$(RM) $(NAME)
 			make -C Libft fclean
+			make -C minilibx-linux clean
 
 re		:	fclean all
 
-f		:	$(LFT) $(OBJ)
+f		:	$(OBJ)
+			make -C Libft
+			make -C minilibx-linux
 			$(CC) $(CF) $(CFS) -o $(NAME) $(SRC) $(LIB)
 
 fre		:	fclean f
 
 n		:
+			$(SLIBX)
 			$(N)
+			$(RLIBX)
 
-.PHONY	:	all clean fclean re f fre n
+nf		:
+			$(RLIBX)
+
+.PHONY	:	all clean fclean re f fre n nf

@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:48:02 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/11/30 16:59:25 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/02 21:50:52 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ int	main(int ac, char **av)
 	if (adm == NULL)
 		return (1);
 	all_display(adm);
+	if (ft_graphical(adm, count_nb(adm[0]), adm[0]->y))
+		return (1);
 	ft_free_allist(adm, adm[0]->y, NULL);
 	return (0);
 }
