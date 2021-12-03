@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:50:54 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/02 22:26:21 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:36:32 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,27 @@ typedef struct s_dll
 typedef struct s_adm
 {
 	int				y;
+	int				e;
+	int				te;
+	int				op;
 	int				col;
 	struct s_dll	*play;
 	struct s_dll	*head;
 	struct s_dll	*tail;
+	void			*p[8];
 }	t_adm;
 
 typedef struct s_plp
 {
-	int	x;
-	int	y;
+	int	px;
+	int	py;
+	int	tx;
+	int	ty;
 }	t_plp;
 
 void	all_display(t_adm **adm);
 
-int		count_nb(t_adm *adm);
+t_plp	*ft_pixel_pos(t_dll **pos);
 int		ft_graphical(t_adm **adm, int x, int y);
 
 void	*ft_error(char *s, void *r);
@@ -68,10 +74,14 @@ void	*ft_error_frli(char *s, void *r, int ret, char *line);
 void	*ft_error_fral(char *s, void *r, t_adm **adm, int y);
 int		ft_error_int(char *s, int r);
 
+int		count_nb(t_adm *adm);
 int		ft_checker(t_adm **adm, int y);
 
 int		ft_insert(t_adm *adm, char c, int y, int x);
 t_adm	*ft_new_list(t_adm *adm, char *s, int y, int x);
+
+int		ft_ver(t_adm **adm, void **p, int i);
+int		ft_hor(t_adm **adm, void **p, int i);
 
 t_adm	*ft_free_list(t_adm *adm);
 void	*ft_free_allist(t_adm **adm, int y, void *r);

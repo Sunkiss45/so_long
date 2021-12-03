@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:48:02 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/02 21:50:52 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:42:15 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_count_rows(int fd, int y, int v)
 
 	ret = get_next_line(fd, &line);
 	if (ret == -1)
-		return (ft_error_int("Return of -1 of gnl 1", -1));
+		return (ft_error_int("Return of -1 of gnl 1, maybe not exist", -1));
 	len = ft_strlen(line);
 	free(line);
 	y++;
@@ -29,7 +29,8 @@ int	ft_count_rows(int fd, int y, int v)
 		ret = get_next_line(fd, &line);
 		if (ret == -1)
 			return (ft_error_int("Return of -1 of gnl 1", -1));
-		if (line[0] != '\0' && ft_strlen(line) != len)
+		if ((line[0] != '\0' && ft_strlen(line) != len)
+				|| (line[0] == '\0' && ret == 1))
 			v++;
 		if (line[0] != '\0')
 			y++;
@@ -83,9 +84,7 @@ t_adm	**ft_parsing(t_adm **adm, char *av)
 		return (NULL);
 	adm[0]->y = y;
 	if (ft_checker(adm, adm[0]->y) > 0)
-		return (ft_error_fral("Maps don't have good elements", NULL, adm, y));
-	else if (ft_checker(adm, adm[0]->y) < 0)
-		return (ft_error_fral("Maps don't have valid walls", NULL, adm, y));
+		return (ft_free_allist(adm, y, NULL));
 	return (adm);
 }
 
@@ -116,7 +115,6 @@ int	main(int ac, char **av)
 	adm = ft_parsing(adm, av[1]);
 	if (adm == NULL)
 		return (1);
-	all_display(adm);
 	if (ft_graphical(adm, count_nb(adm[0]), adm[0]->y))
 		return (1);
 	ft_free_allist(adm, adm[0]->y, NULL);

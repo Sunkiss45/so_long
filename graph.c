@@ -6,52 +6,42 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 18:00:47 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/02 23:08:09 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:43:05 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	count_nb(t_adm *adm)
+t_plp	*ft_pixel_pos(t_dll **pos)
 {
-	t_dll	*now;
-	int		i;
+	t_plp	*plp;
 
-	now = adm->head;
-	if (!now)
-		return (0);
-	i = 1;
-	while (now->r != NULL)
-	{
-		i++;
-		now = now->r;
-	}
-	return (i);
-}
-
-t_plp	*ft_player_pos(t_adm **adm, t_plp *plp)
-{
-	t_dll	*now;
-
-	now = adm[0]->play;
-	plp->x = now->x * PI;
-	plp->y = now->y * PI;
+	plp = malloc(sizeof(plp));
+	plp->px = pos[0]->x * PI;
+	plp->py = pos[0]->y * PI;
+	plp->tx = pos[1]->x * PI;
+	plp->ty = pos[1]->y * PI;
 	return (plp);
 }
 
-int	deal_key(int key, void **ptr)
+int	deal_key(int key, t_adm **adm)
 {
-	printf(YELLOW"[%d]"RESET"\n", key);
+	void	**p;
+	int		i;
+
+	i = 0;
+	p = adm[0]->p;
 	if (key == 119)
-		printf(RED"Je trouve W"RESET"\n");
-	if (key == 97)
-		printf(RED"Je trouve A"RESET"\n");
+		i += ft_ver(adm, p, 1);
 	if (key == 115)
-		printf(RED"Je trouve S"RESET"\n");
+		i += ft_ver(adm, p, -1);
+	if (key == 97)
+		i += ft_hor(adm, p, 1);
 	if (key == 100)
-		printf(RED"Je trouve D"RESET"\n");
-	if (key == 65307)
-		mlx_destroy_window(ptr[0], ptr[1]);
+		i += ft_hor(adm, p, -1);
+	if (key == 65307 || i)
+		mlx_destroy_window(p[0], p[1]);
+//	all_display(adm);
 	return (key);
 }
 
@@ -72,10 +62,12 @@ void	ft_print_img(t_adm **adm, void **ptr, int y)
 				mlx_put_image_to_window(ptr[0], ptr[1], ptr[2], x, (i * PI));
 			if (now->c == '1')
 				mlx_put_image_to_window(ptr[0], ptr[1], ptr[3], x, (i * PI));
-			if (now->c == 'C' || now->c == 'E')
+			if (now->c == 'C')
 				mlx_put_image_to_window(ptr[0], ptr[1], ptr[4], x, (i * PI));
 			if (now->c == 'P')
 				mlx_put_image_to_window(ptr[0], ptr[1], ptr[5], x, (i * PI));
+			if (now->c == 'E')
+				mlx_put_image_to_window(ptr[0], ptr[1], ptr[7], x, (i * PI));
 			x += PI;
 			now = now->r;
 		}
@@ -84,27 +76,28 @@ void	ft_print_img(t_adm **adm, void **ptr, int y)
 
 int	ft_graphical(t_adm **adm, int x, int y)
 {
-	void	*ptr[6];
 	int		p;
 
-	int		z;
-
 	p = PI;
-	ptr[0] = mlx_init();
-	if (ptr[0] == NULL)
+	adm[0]->p[0] = mlx_init();
+	if (adm[0]->p[0] == NULL)
 		return (1);
-	ptr[2] = mlx_xpm_file_to_image(ptr[0], "./Tex/0.xpm", &p, &p);
-	ptr[3] = mlx_xpm_file_to_image(ptr[0], "./Tex/1.xpm", &p, &p);
-	ptr[4] = mlx_xpm_file_to_image(ptr[0], "./Tex/C.xpm", &p, &p);
-	ptr[5] = mlx_xpm_file_to_image(ptr[0], "./Tex/redbrik.xpm", &p, &p);
-	if (ptr[2] == NULL || ptr[3] == NULL || ptr[4] == NULL || ptr[5] == NULL)
-		return (ft_error_int("Insh", 0));
-	ptr[1] = mlx_new_window(ptr[0], (PI * x), (PI * y), "so_long");
-	if (ptr[1] == NULL)
+	adm[0]->p[2] = mlx_xpm_file_to_image(adm[0]->p[0], "./Tex/0.xpm", &p, &p);
+	adm[0]->p[3] = mlx_xpm_file_to_image(adm[0]->p[0], "./Tex/1.xpm", &p, &p);
+	adm[0]->p[4] = mlx_xpm_file_to_image(adm[0]->p[0], "./Tex/C.xpm", &p, &p);
+	adm[0]->p[5] = mlx_xpm_file_to_image(adm[0]->p[0], "./Tex/P.xpm", &p, &p);
+	adm[0]->p[6] = mlx_xpm_file_to_image(adm[0]->p[0], "./Tex/P2.xpm", &p, &p);
+	adm[0]->p[7] = mlx_xpm_file_to_image(adm[0]->p[0], "./Tex/E.xpm", &p, &p);
+	if (adm[0]->p[2] == NULL || adm[0]->p[3] == NULL || adm[0]->p[4] == NULL
+		|| adm[0]->p[5] == NULL || adm[0]->p[6] == NULL)
 		return (1);
-	ft_print_img(adm, ptr, y);
-	z = mlx_key_hook(ptr[1], deal_key, (void *)0);
-	printf(GREEN"[%d]"RESET"\n", z);
-	mlx_loop(ptr[0]);
+	adm[0]->p[1] = mlx_new_window(adm[0]->p[0], (PI * x), (PI * y), "so_long");
+	if (adm[0]->p[1] == NULL)
+		return (1);
+	ft_print_img(adm, adm[0]->p, y);
+	adm[0]->op = 0;
+//	all_display(adm);
+	mlx_key_hook(adm[0]->p[1], deal_key, adm);
+	mlx_loop(adm[0]->p[0]);
 	return (0);
 }

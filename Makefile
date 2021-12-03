@@ -6,7 +6,7 @@
 #    By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 16:06:27 by ebarguil          #+#    #+#              #
-#    Updated: 2021/12/02 18:33:38 by ebarguil         ###   ########.fr        #
+#    Updated: 2021/12/03 22:40:33 by ebarguil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,9 @@ SRC		=	main.c \
 			checker.c \
 			graph.c \
 			free.c \
+			moove.c \
 
 OBJ		=	$(SRC:.c=.o)
-
-N		=	norminette
-
-SLIBX	=	mv minilibx-linux .minilibx-linux
-
-RLIBX	=	mv .minilibx-linux minilibx-linux
 
 CC		=	gcc
 
@@ -63,11 +58,7 @@ f		:	$(OBJ)
 fre		:	fclean f
 
 n		:
-			$(SLIBX)
-			$(N)
-			$(RLIBX)
-
-nf		:
-			$(RLIBX)
+			norminette $(SRC)
+			norminette so_long.h
 
 .PHONY	:	all clean fclean re f fre n nf

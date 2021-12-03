@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 17:04:12 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/02 18:50:44 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/03 21:52:39 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ void	all_display(t_adm **adm)
 {
 	t_dll	*now;
 	int		i;
-	int		s;
+//	int		s;
 	int		y;
 
-	s = adm[0]->y;
+//	s = adm[0]->y;
 	y = adm[0]->y;
 	i = -1;
-	printf(YELLOW"\ny = [%d]\n"RESET"\n", y);
+//	printf(YELLOW"\ny = [%d]\n"RESET"\n", y);
+	printf(RESET"\n");
 	while (++i < y)
 	{
 		now = adm[i]->head;
@@ -42,8 +43,10 @@ void	all_display(t_adm **adm)
 		}
 		printf(RESET"\n");
 	}
+	printf(RESET"\n");
 
-	y = s;
+
+/*	y = s;
 	i = -1;
 	printf(YELLOW"\nVerif des [x]\n"RESET"\n");
 	while (++i < y)
@@ -71,5 +74,5 @@ void	all_display(t_adm **adm)
 			now = now->r;
 		}
 		printf(GREEN"|"RED" -> NULL"RESET"\n");
-	}
+	}*/
 }

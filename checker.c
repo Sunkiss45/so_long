@@ -6,11 +6,28 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 16:08:42 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/02 22:28:34 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:41:57 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	count_nb(t_adm *adm)
+{
+	t_dll	*now;
+	int		i;
+
+	now = adm->head;
+	if (!now)
+		return (0);
+	i = 1;
+	while (now->r != NULL)
+	{
+		i++;
+		now = now->r;
+	}
+	return (i);
+}
 
 int	ft_count_elm(t_adm **adm, t_dll *now, int y, int *v)
 {
@@ -25,10 +42,12 @@ int	ft_count_elm(t_adm **adm, t_dll *now, int y, int *v)
 		{
 			if (now->c == 'P' && v[1]++ != -1)
 				adm[0]->play = now;
-			if (now->c == 'E')
+			else if (now->c == 'E')
 				v[2]++;
-			if (now->c == 'C')
+			else if (now->c == 'C')
 				v[3]++;
+			else if (now->c != '1' && now->c != '0')
+				return (1);
 			now = now->r;
 		}
 	}
@@ -37,6 +56,11 @@ int	ft_count_elm(t_adm **adm, t_dll *now, int y, int *v)
 	adm[0]->col = v[3];
 	return (0);
 }
+
+/*int	ft_doubl(t_adm **adm, int y)
+{
+	
+}*/
 
 int	ft_checker(t_adm **adm, int y)
 {
@@ -53,14 +77,14 @@ int	ft_checker(t_adm **adm, int y)
 			while (now != NULL)
 			{
 				if (now->c != '1')
-					return (-1);
+					return (ft_error_int("Maps don't have valid walls", 1));
 				now = now->r;
 			}
 		}
 		else if (adm[v]->head->c != '1' || adm[v]->tail->c != '1')
-			return (-1);
+			return (ft_error_int("Maps don't have valid walls", 1));
 	}
 	if (ft_count_elm(adm, now, y, z))
-		return (1);
+		return (ft_error_int("Maps don't have good elements", 1));
 	return (0);
 }
