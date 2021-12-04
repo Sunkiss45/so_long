@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 20:04:02 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/04 18:16:56 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/04 22:58:59 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_plp	*ft_pixel_pos(t_dll **pos)
 {
 	t_plp	*plp;
 
-	plp = malloc(sizeof(plp) * 2);
+	plp = malloc(sizeof(*plp));
 	if (plp == NULL)
 		return (NULL);
 	plp->px = pos[0]->x * PI;
@@ -31,12 +31,13 @@ int	ft_vis(t_adm **adm, t_dll **pos, void **p)
 	t_plp	*plp;
 
 	plp = ft_pixel_pos(pos);
+	if (plp == NULL && !ft_error("Malloc of pixel_pos has crashed", NULL))
+		ft_close(adm);
 	if (adm[0]->te)
 	{
 		if (adm[0]->col == 0)
 		{
 			free(plp);
-			printf(YELLOW"\nYOU WIN, total count : %d"RESET"\n", adm[0]->op);
 			return (1);
 		}
 		mlx_put_image_to_window(p[0], p[1], p[6], plp->tx, plp->ty);
@@ -64,7 +65,10 @@ int	ft_dir(t_adm **adm, t_dll **pos, void **p)
 		adm[0]->te = 1;
 	pos[1]->c = 'P';
 	if (ft_vis(adm, pos, p))
+	{
+		printf(YELLOW"\nYOU WIN, total count : %d"RESET"\n", adm[0]->op);
 		return (1);
+	}
 	if (adm[0]->e)
 		pos[0]->c = 'E';
 	else

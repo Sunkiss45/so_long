@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:50:54 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/03 22:36:32 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/04 22:35:07 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_plp
 void	all_display(t_adm **adm);
 
 t_plp	*ft_pixel_pos(t_dll **pos);
+
+int		ft_close(t_adm **adm);
 int		ft_graphical(t_adm **adm, int x, int y);
 
 void	*ft_error(char *s, void *r);

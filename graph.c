@@ -6,13 +6,13 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 18:00:47 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/04 22:29:15 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/04 23:02:08 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_init_img(void **p)
+void	ft_init_tex(void **p)
 {
 	int	pi;
 
@@ -95,14 +95,14 @@ int	ft_graphical(t_adm **adm, int x, int y)
 {
 	adm[0]->p[0] = mlx_init();
 	if (adm[0]->p[0] == NULL)
-		return (1);
-	ft_init_img(adm[0]->p);
+		return (ft_error_int("mlx_ptr doesn't init correctly", 1));
+	ft_init_tex(adm[0]->p);
 	if (adm[0]->p[2] == NULL || adm[0]->p[3] == NULL || adm[0]->p[4] == NULL
-		|| adm[0]->p[5] == NULL || adm[0]->p[6] == NULL)
-		return (1);
+		|| adm[0]->p[5] == NULL || adm[0]->p[6] == NULL || adm[0]->p[7] == NULL)
+		return (ft_error_int("one of img_ptr doesn't init correctly", 1));
 	adm[0]->p[1] = mlx_new_window(adm[0]->p[0], (PI * x), (PI * y), "so_long");
 	if (adm[0]->p[1] == NULL)
-		return (1);
+		return (ft_error_int("one of img_ptr don't init correctly", 1));
 	ft_print_img(adm, adm[0]->p, y);
 	adm[0]->op = 0;
 	adm[0]->e = 0;
