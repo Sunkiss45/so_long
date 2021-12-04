@@ -6,12 +6,13 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 17:04:12 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/03 21:52:39 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/04 22:29:47 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
 void	all_display(t_adm **adm)
 {
 	t_dll	*now;
@@ -46,7 +47,7 @@ void	all_display(t_adm **adm)
 	printf(RESET"\n");
 
 
-/*	y = s;
+	y = s;
 	i = -1;
 	printf(YELLOW"\nVerif des [x]\n"RESET"\n");
 	while (++i < y)
@@ -74,5 +75,5 @@ void	all_display(t_adm **adm)
 			now = now->r;
 		}
 		printf(GREEN"|"RED" -> NULL"RESET"\n");
-	}*/
-}
+	}
+}*/

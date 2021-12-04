@@ -6,7 +6,7 @@
 #    By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 16:06:27 by ebarguil          #+#    #+#              #
-#    Updated: 2021/12/03 22:40:33 by ebarguil         ###   ########.fr        #
+#    Updated: 2021/12/04 14:25:18 by ebarguil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC		=	main.c \
 			checker.c \
 			graph.c \
 			free.c \
-			moove.c \
+			move.c \
 
 OBJ		=	$(SRC:.c=.o)
 

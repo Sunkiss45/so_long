@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:50:54 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/01 17:40:15 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/04 17:40:17 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define BUFFER_SIZE 1024
 
 int		ft_strlen(char *s);
+
+void	ft_putchar_fd(char c, int fd);
+void	ft_putnbr_fd(int n, int fd);
 
 int		get_next_line(int fd, char **line);
 int		ft_check_n(char *str);

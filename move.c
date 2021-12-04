@@ -1,30 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moove.c                                            :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 20:04:02 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/03 22:40:09 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:16:56 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+t_plp	*ft_pixel_pos(t_dll **pos)
+{
+	t_plp	*plp;
+
+	plp = malloc(sizeof(plp) * 2);
+	if (plp == NULL)
+		return (NULL);
+	plp->px = pos[0]->x * PI;
+	plp->py = pos[0]->y * PI;
+	plp->tx = pos[1]->x * PI;
+	plp->ty = pos[1]->y * PI;
+	return (plp);
+}
+
 int	ft_vis(t_adm **adm, t_dll **pos, void **p)
 {
 	t_plp	*plp;
-	int		i;
 
-	i = adm[0]->e;
-	if (i)
-		i = i;
 	plp = ft_pixel_pos(pos);
 	if (adm[0]->te)
 	{
 		if (adm[0]->col == 0)
+		{
+			free(plp);
+			printf(YELLOW"\nYOU WIN, total count : %d"RESET"\n", adm[0]->op);
 			return (1);
+		}
 		mlx_put_image_to_window(p[0], p[1], p[6], plp->tx, plp->ty);
 	}
 	else
@@ -42,7 +56,8 @@ int	ft_dir(t_adm **adm, t_dll **pos, void **p)
 	if (pos[1]->c == '1')
 		return (0);
 	adm[0]->op++;
-	printf(PURPLE"\n[%d]\n", adm[0]->op);
+	ft_putnbr_fd(adm[0]->op, 1);
+	write(1, "\r", 1);
 	if (pos[1]->c == 'C')
 		adm[0]->col--;
 	if (pos[1]->c == 'E')

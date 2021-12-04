@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:48:02 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/03 22:42:15 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/04 21:02:09 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_count_rows(int fd, int y, int v)
 		if (ret == -1)
 			return (ft_error_int("Return of -1 of gnl 1", -1));
 		if ((line[0] != '\0' && ft_strlen(line) != len)
-				|| (line[0] == '\0' && ret == 1))
+			|| (line[0] == '\0' && ret == 1))
 			v++;
 		if (line[0] != '\0')
 			y++;
