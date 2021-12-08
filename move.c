@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 20:04:02 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/04 22:58:59 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:40:14 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_dir(t_adm **adm, t_dll **pos, void **p)
 	pos[1]->c = 'P';
 	if (ft_vis(adm, pos, p))
 	{
-		printf(YELLOW"\nYOU WIN, total count : %d"RESET"\n", adm[0]->op);
+		printf(YELLOW"\n!! YOU WIN !!\n"CYAN"Mouvement total : %d", adm[0]->op);
 		return (1);
 	}
 	if (adm[0]->e)

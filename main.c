@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 12:48:02 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/04 21:02:09 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:29:56 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,19 @@ t_adm	**ft_create_map(t_adm **adm, int fd, int y)
 t_adm	**ft_parsing(t_adm **adm, char *av)
 {
 	int	y;
+	int	fd;
 
-	y = ft_count_rows(open(av, O_RDONLY), 0, 0);
+	fd = open(av, O_RDONLY);
+	y = ft_count_rows(fd, 0, 0);
+	close(fd);
 	if (y == -1)
 		return (NULL);
 	adm = malloc(sizeof(*adm) * y);
 	if (adm == NULL)
 		return (ft_error("Crash of Malloc **adm", NULL));
-	adm = ft_create_map(adm, open(av, O_RDONLY), 0);
+	fd = open(av, O_RDONLY);
+	adm = ft_create_map(adm, fd, 0);
+	close(fd);
 	if (adm == NULL)
 		return (NULL);
 	adm[0]->y = y;

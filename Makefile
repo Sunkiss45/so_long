@@ -6,7 +6,7 @@
 #    By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 16:06:27 by ebarguil          #+#    #+#              #
-#    Updated: 2021/12/04 14:25:18 by ebarguil         ###   ########.fr        #
+#    Updated: 2021/12/08 12:26:27 by ebarguil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,5 +60,6 @@ fre		:	fclean f
 n		:
 			norminette $(SRC)
 			norminette so_long.h
+			make -C Libft n
 
 .PHONY	:	all clean fclean re f fre n nf

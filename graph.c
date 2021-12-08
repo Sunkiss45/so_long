@@ -6,7 +6,7 @@
 /*   By: ebarguil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 18:00:47 by ebarguil          #+#    #+#             */
-/*   Updated: 2021/12/04 23:02:08 by ebarguil         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:38:44 by ebarguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,17 @@ int	ft_close(t_adm **adm)
 
 	p = adm[0]->p;
 	i = 1;
-	while (++i < 8)
-		mlx_destroy_image(p[0], p[i]);
-	mlx_destroy_window(p[0], p[1]);
-	mlx_destroy_display(p[0]);
-	free(p[0]);
+	printf(RESET"\n");
+	if (p[0])
+	{
+		while (++i < 8)
+			if (p[i])
+				mlx_destroy_image(p[0], p[i]);
+		if (p[1])
+			mlx_destroy_window(p[0], p[1]);
+		mlx_destroy_display(p[0]);
+		free(p[0]);
+	}
 	ft_free_allist(adm, adm[0]->y, NULL);
 	exit (0);
 	return (0);
@@ -93,16 +99,17 @@ void	ft_print_img(t_adm **adm, void **ptr, int y)
 
 int	ft_graphical(t_adm **adm, int x, int y)
 {
+	x = x;
 	adm[0]->p[0] = mlx_init();
 	if (adm[0]->p[0] == NULL)
-		return (ft_error_int("mlx_ptr doesn't init correctly", 1));
+		return (ft_close(adm));
 	ft_init_tex(adm[0]->p);
 	if (adm[0]->p[2] == NULL || adm[0]->p[3] == NULL || adm[0]->p[4] == NULL
 		|| adm[0]->p[5] == NULL || adm[0]->p[6] == NULL || adm[0]->p[7] == NULL)
-		return (ft_error_int("one of img_ptr doesn't init correctly", 1));
+		return (ft_close(adm));
 	adm[0]->p[1] = mlx_new_window(adm[0]->p[0], (PI * x), (PI * y), "so_long");
 	if (adm[0]->p[1] == NULL)
-		return (ft_error_int("one of img_ptr don't init correctly", 1));
+		return (ft_close(adm));
 	ft_print_img(adm, adm[0]->p, y);
 	adm[0]->op = 0;
 	adm[0]->e = 0;
